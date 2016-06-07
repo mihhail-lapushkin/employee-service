@@ -52,6 +52,10 @@ eclipse {
   }
 }
 
+task stage {
+  dependsOn bootRepackage
+}
+
 task wrapper(type: Wrapper) {
   gradleVersion = '2.6'
 }
