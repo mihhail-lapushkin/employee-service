@@ -1,0 +1,57 @@
+buildscript {
+  ext {
+    springBootVersion = '1.4.0.M3'
+  }
+  
+  repositories {
+    maven { url "https://repo.spring.io/milestone" }
+    mavenCentral()
+  }
+  
+  dependencies {
+    classpath("org.springframework.boot:spring-boot-gradle-plugin:$springBootVersion")
+  }
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+apply plugin: 'spring-boot'
+
+ext {
+  projectName = 'employee-service'
+  projectVersion = '1.0.0'
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+  maven { url "https://repo.spring.io/milestone" }
+  mavenCentral()
+}
+
+dependencies {
+  compile("org.springframework.boot:spring-boot-starter-web")
+  compile("org.springframework.boot:spring-boot-starter-data-rest")
+  compile("org.springframework.boot:spring-boot-starter-data-jpa")
+  compile("com.h2database:h2")
+  
+  testCompile("org.springframework.boot:spring-boot-starter-test")
+}
+
+jar {
+  baseName = "$projectName"
+  version = "$projectVersion"
+}
+
+eclipse {
+  project {
+    natures "org.eclipse.buildship.core.gradleprojectnature"
+    buildCommand "org.eclipse.buildship.core.gradleprojectbuilder"
+  }
+}
+
+task wrapper(type: Wrapper) {
+  gradleVersion = '2.6'
+}
